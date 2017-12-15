@@ -1,22 +1,40 @@
 #include<iostream>
 #include<vector>
+#include <numeric>
 
 int main()
 {
-    std::vector<int> a(10, 0) ;      //大小为10初值为0的向量a
+    std::vector<int> a(10, 100) ;      //大小为10初值为0的向量a
 
     //对其中部分元素进行输入
-    std::cin >>a[2] ;
-    std::cin >>a[5] ;
-    std::cin >>a[6] ;
-    a[0] = 10;
-    std::cout << a[0] ;
+    int j = 0;
+    for ( j = 0;j<10 ;j++ ){
+      a[j] = j;
+    }
+    std::cout << a[0] << std::endl;
+    std::cout << a.at(5) << std::endl;
+
+    std::vector <int> :: iterator itb = a.begin();
+    std::vector <int> :: iterator ite = a.end()-1;
+    auto itm = a.begin()+a.size()/2;
+
+    std::cout << "itb : " << *itb << std::endl;
+    std::cout << "ite : " << *ite << std::endl;
+    std::cout << "itm : " << *itm << std::endl;
+
+    a.push_back(555);
+    std::cout << "last: " << *(a.end()-1) << std::endl;
+    std::cout << "a.size(): " << a.size() << std::endl;
+
+
+    int summ = accumulate(itb,ite,0);
+    std::cout <<"x:"<< summ << std::endl;
 
     //全部输出
     //int i ;
-	unsigned i;
+    unsigned i;
     for(i=0; i<a.size(); i++)
-        std::cout<<a[i]<<" " ;
+        std::cout<<a[i]<<" " << std::endl;
 
     return 0 ;
 }

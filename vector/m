@@ -1,0 +1,1 @@
+g++ -Wall -std=c++11 -ggdb t1.cpp

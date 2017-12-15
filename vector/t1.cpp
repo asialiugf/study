@@ -2,9 +2,13 @@
 #include<vector>
 #include <numeric>
 
+
+typedef std::vector<int> EE;
 int main()
 {
-    std::vector<int> a(10, 100) ;      //大小为10初值为0的向量a
+    std::vector<int> a(10, 100) ;      //大小为10初值为100的向量a
+	EE b(20,1000);
+    std::cout << " EE typedef : " << *(b.end()-1) << b[2] << std::endl;
 
     //对其中部分元素进行输入
     int j = 0;
@@ -15,10 +19,10 @@ int main()
     std::cout << a.at(5) << std::endl;
 
     std::vector <int> :: iterator itb = a.begin();
-    std::vector <int> :: iterator ite = a.end()-1;
+    std::vector <int> :: iterator ite = a.end()-1;  //最后一个值需要-1
     auto itm = a.begin()+a.size()/2;
 
-    std::cout << "itb : " << *itb << std::endl;
+    std::cout << "itb : " << *itb << std::endl;  // 要用* iterator来取值
     std::cout << "ite : " << *ite << std::endl;
     std::cout << "itm : " << *itm << std::endl;
 

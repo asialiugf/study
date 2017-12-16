@@ -16,12 +16,11 @@ namespace zl
 {
 class ThreadsGuard
 {
-public:
-    ThreadsGuard(std::vector<std::thread>& v)
-        : threads_(v)
-    {
+private:
+    std::vector<std::thread>& threads_;
 
-    }
+public:
+    ThreadsGuard(std::vector<std::thread>& v) : threads_(v) {}  //构造函数，给成员变量 thread_ 赋值为v, v为引用  &
 
     ~ThreadsGuard()
     {
@@ -37,8 +36,6 @@ private:
 
     ThreadsGuard(const ThreadsGuard&) = delete;
     ThreadsGuard& operator = (const ThreadsGuard&) = delete;
-private:
-    std::vector<std::thread>& threads_;
 };
 
 
@@ -46,6 +43,22 @@ class ThreadPool
 {
 public:
     typedef std::function<void()> task_type;
+
+private:
+    ThreadPool(ThreadPool&&) = delete;
+    ThreadPool& operator = (ThreadPool&&) = delete;
+    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool& operator = (const ThreadPool&) = delete;
+
+private:
+    std::atomic<bool> stop_;
+    std::mutex mtx_;
+    std::condition_variable cond_;
+
+    std::queue<task_type> tasks_;
+    std::vector<std::thread> threads_;
+    zl::ThreadsGuard tg_;
+
 
 public:
     explicit ThreadPool(int n = 0);
@@ -64,20 +77,6 @@ public:
     template<class Function, class... Args>
     std::future<typename std::result_of<Function(Args...)>::type> add(Function&&, Args&&...);
 
-private:
-    ThreadPool(ThreadPool&&) = delete;
-    ThreadPool& operator = (ThreadPool&&) = delete;
-    ThreadPool(const ThreadPool&) = delete;
-    ThreadPool& operator = (const ThreadPool&) = delete;
-
-private:
-    std::atomic<bool> stop_;
-    std::mutex mtx_;
-    std::condition_variable cond_;
-
-    std::queue<task_type> tasks_;
-    std::vector<std::thread> threads_;
-    zl::ThreadsGuard tg_;
 };
 
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "ThreadPool.h"
-using namespace std;
+//using namespace std;
 
 
 int main()
@@ -27,7 +27,7 @@ int main()
         }
         for(size_t i = 0; i < v.size(); ++i) {
             std::lock_guard<std::mutex> lg(mtx);
-            cout << v[i].get() << endl;
+            std::cout << v[i].get() << std::endl;
         }
         for(size_t i = 0; i < v1.size(); ++i) {
             v1[i].get();

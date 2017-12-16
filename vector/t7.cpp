@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
 
     return EXIT_SUCCESS;
 }
-
 /*
 需要为自定义的结构类型重载()运算符， 而且第一个参数的类型应该和
 调用accumulate()的第三个参数(也就是初始化值)类型一致,其他就没了...

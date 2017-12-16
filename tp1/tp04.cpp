@@ -30,7 +30,7 @@ public:
     // The function-call operator prints whether the number is
     // even or odd. If the number is even, this method updates
     // the counter.
-    void operator()(int n)
+    void operator()(int n) const
     {
         //std::cout << n << std::endl;
         m_evenCount += n;
@@ -41,7 +41,7 @@ private:
     // Default assignment operator to silence warning C4512.
     FunctorClass& operator=(const FunctorClass&);
 
-    uint64_t m_evenCount; // the number of even variables in the vector.
+    uint64_t &m_evenCount; // the number of even variables in the vector.  这里是不是有问题？
 };
 
 class timer

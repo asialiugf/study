@@ -1,3 +1,4 @@
-git add *
+git add -A
 git commit -m"."
-git push
+git push gitee
+git push github
